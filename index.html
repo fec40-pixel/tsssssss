@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sunrise Logo Animation</title>
 
 <style>
@@ -27,7 +27,7 @@
 
   @keyframes sun-rise {
     from {
-      transform: translateY(70px);
+      transform: translateY(80px);
       opacity: 0;
     }
     to {
@@ -36,11 +36,11 @@
     }
   }
 
-  /* Rays grow from square */
+  /* Rays grow from square edge */
   .ray {
     transform-origin: center bottom;
     transform: scaleY(0);
-    animation: ray-grow 1.6s var(--ease) forwards;
+    animation: ray-grow 1.8s var(--ease) forwards;
   }
 
   @keyframes ray-grow {
@@ -50,43 +50,34 @@
   }
 
   /* Delays: center → sides */
-  .r0 { animation-delay: 0.9s; }
-  .r1 { animation-delay: 1.05s; }
-  .r2 { animation-delay: 1.2s; }
-  .r3 { animation-delay: 1.35s; }
-  .r4 { animation-delay: 1.5s; }
+  .r0 { animation-delay: 1s; }
+  .r1 { animation-delay: 1.15s; }
+  .r2 { animation-delay: 1.3s; }
+  .r3 { animation-delay: 1.45s; }
+  .r4 { animation-delay: 1.6s; }
 </style>
 </head>
 
 <body>
 
-<svg viewBox="0 0 800 600" width="400" height="300">
-  <defs>
-    <!-- Clip path matching the square -->
-    <clipPath id="square-clip">
-      <rect x="-60" y="-60" width="120" height="120" rx="20" />
-    </clipPath>
-  </defs>
-
+<svg viewBox="0 0 800 600" width="400" height="300" aria-label="Sunrise Logo">
   <g transform="translate(400 300)">
 
-    <!-- RAYS (clipped by the square) -->
-    <g clip-path="url(#square-clip)">
-      <rect class="ray r0" x="-15" y="-300" width="30" height="240" fill="#FF8C42"/>
-      <rect class="ray r1" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(22.5)"/>
-      <rect class="ray r1" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(-22.5)"/>
+    <!-- RAYS (positioned so their base is behind the square) -->
+    <rect class="ray r0" x="-15" y="-260" width="30" height="200" fill="#FF8C42"/>
+    <rect class="ray r1" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(22.5)"/>
+    <rect class="ray r1" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(-22.5)"/>
 
-      <rect class="ray r2" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(45)"/>
-      <rect class="ray r2" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(-45)"/>
+    <rect class="ray r2" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(45)"/>
+    <rect class="ray r2" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(-45)"/>
 
-      <rect class="ray r3" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(67.5)"/>
-      <rect class="ray r3" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(-67.5)"/>
+    <rect class="ray r3" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(67.5)"/>
+    <rect class="ray r3" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(-67.5)"/>
 
-      <rect class="ray r4" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(90)"/>
-      <rect class="ray r4" x="-15" y="-300" width="30" height="240" fill="#FF8C42" transform="rotate(-90)"/>
-    </g>
+    <rect class="ray r4" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(90)"/>
+    <rect class="ray r4" x="-15" y="-260" width="30" height="200" fill="#FF8C42" transform="rotate(-90)"/>
 
-    <!-- SUN -->
+    <!-- SUN (drawn last so it hides ray bases) -->
     <g class="sun">
       <rect x="-60" y="-60" width="120" height="120" rx="20" fill="#E63946"/>
       <polygon
@@ -99,3 +90,4 @@
 
 </body>
 </html>
+
