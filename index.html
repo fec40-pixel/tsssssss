@@ -1,54 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Recreation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunrise Logo Animation</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    /* === TIMING === */
+    :root {
+        --duration: 3s;
+        --ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+    }
+
+    /* Sun rises from below horizon */
+    .sun-center {
+        animation: sun-rise var(--duration) var(--ease) forwards;
+    }
+
+    @keyframes sun-rise {
+        from {
+            transform: translateY(70px);
+            opacity: 0;
         }
-        body {
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
+        to {
+            transform: translateY(0);
+            opacity: 1;
         }
-    </style>
+    }
+
+    /* Rays softly reveal (NOT grow) */
+    .ray {
+        opacity: 0;
+        animation: ray-reveal 1.6s var(--ease) forwards;
+    }
+
+    @keyframes ray-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Center → sides delay */
+    .ray-0 { animation-delay: 0.6s; }
+    .ray-1 { animation-delay: 0.8s; }
+    .ray-2 { animation-delay: 1s; }
+    .ray-3 { animation-delay: 1.2s; }
+    .ray-4 { animation-delay: 1.4s; }
+
+</style>
 </head>
+
 <body>
-    <!-- Main SVG container for the logo -->
-    <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-        <!-- Define the center point of the logo -->
-        <g transform="translate(400, 300)">
-            
-            <!-- Orange rays - 9 rectangular beams in half-sun arrangement (longer) -->
-            <!-- Center ray (vertical) -->
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" />
-            
-            <!-- Rays to the right of center -->
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(22.5)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(45)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(67.5)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(90)" />
-            
-            <!-- Rays to the left of center -->
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-22.5)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-45)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-67.5)" />
-            <rect x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-90)" />
-            
-            <!-- Red rounded square - smaller center shape -->
+
+<svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(400, 300)">
+
+        <!-- RAYS (STATIC SHAPE, SOFT REVEAL) -->
+        <rect class="ray ray-0" x="-15" y="-280" width="30" height="220" fill="#FF8C42" />
+        <rect class="ray ray-1" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(22.5)" />
+        <rect class="ray ray-1" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-22.5)" />
+
+        <rect class="ray ray-2" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(45)" />
+        <rect class="ray ray-2" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-45)" />
+
+        <rect class="ray ray-3" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(67.5)" />
+        <rect class="ray ray-3" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-67.5)" />
+
+        <rect class="ray ray-4" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(90)" />
+        <rect class="ray ray-4" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-90)" />
+
+        <!-- SUN -->
+        <g class="sun-center">
             <rect x="-60" y="-60" width="120" height="120" rx="20" ry="20" fill="#E63946" />
-            
-            <!-- White 8-point star - proper 8-pointed star with alternating outer and inner points -->
             <polygon points="0,-45 -13,-13 -45,0 -13,13 0,45 13,13 45,0 13,-13" fill="#FFFFFF" />
-            
         </g>
-    </svg>
+
+    </g>
+</svg>
+
 </body>
 </html>
