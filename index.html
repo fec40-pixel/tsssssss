@@ -1,100 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sunrise Logo Animation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunrise Logo</title>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-        background-color: #f5f5f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        overflow: hidden;
-    }
+body {
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    /* === GLOBAL TIMING === */
-    :root {
-        --duration: 3s;
-        --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    }
+/* SUN RISE */
+.sun {
+  animation: sunRise 3s ease-out forwards;
+}
 
-    /* Sun rises from below */
-    .sun {
-        animation: sun-rise var(--duration) var(--ease) forwards;
-    }
+@keyframes sunRise {
+  from {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-    @keyframes sun-rise {
-        from {
-            transform: translateY(70px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+/* RAYS GROW FROM SQUARE */
+.ray {
+  transform-origin: center bottom;
+  transform: scaleY(0);
+  animation: rayGrow 1.6s ease-out forwards;
+}
 
-    /* Rays grow OUT from the square */
-    .ray {
-        transform-origin: center bottom;
-        transform: scaleY(0);
-        animation: ray-grow 1.8s var(--ease) forwards;
-    }
+@keyframes rayGrow {
+  to { transform: scaleY(1); }
+}
 
-    @keyframes ray-grow {
-        from {
-            transform: scaleY(0);
-        }
-        to {
-            transform: scaleY(1);
-        }
-    }
-
-    /* Center → sides delay */
-    .ray-0 { animation-delay: 0.8s; }
-    .ray-1 { animation-delay: 1s; }
-    .ray-2 { animation-delay: 1.15s; }
-    .ray-3 { animation-delay: 1.3s; }
-    .ray-4 { animation-delay: 1.45s; }
-
+/* DELAYS */
+.r0 { animation-delay: 0.9s; }
+.r1 { animation-delay: 1.1s; }
+.r2 { animation-delay: 1.25s; }
+.r3 { animation-delay: 1.4s; }
+.r4 { animation-delay: 1.55s; }
 </style>
 </head>
 
 <body>
 
-<svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-    <g transform="translate(400, 300)">
+<svg viewBox="0 0 800 600" width="100%" height="100%">
+  <g transform="translate(400 300)">
 
-        <!-- RAYS (ORIGINATING FROM SQUARE EDGE) -->
-        <rect class="ray ray-0" x="-15" y="-180" width="30" height="180" fill="#FF8C42" />
-        <rect class="ray ray-1" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(22.5)" />
-        <rect class="ray ray-1" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-22.5)" />
+    <!-- RAYS START AT TOP EDGE OF SQUARE (y = -60) -->
+    <rect class="ray r0" x="-15" y="-240" width="30" height="180" fill="#FF8C42"/>
+    <rect class="ray r1" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(22.5)"/>
+    <rect class="ray r1" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(-22.5)"/>
 
-        <rect class="ray ray-2" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(45)" />
-        <rect class="ray ray-2" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-45)" />
+    <rect class="ray r2" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(45)"/>
+    <rect class="ray r2" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(-45)"/>
 
-        <rect class="ray ray-3" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(67.5)" />
-        <rect class="ray ray-3" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-67.5)" />
+    <rect class="ray r3" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(67.5)"/>
+    <rect class="ray r3" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(-67.5)"/>
 
-        <rect class="ray ray-4" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(90)" />
-        <rect class="ray ray-4" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-90)" />
+    <rect class="ray r4" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(90)"/>
+    <rect class="ray r4" x="-15" y="-240" width="30" height="180" fill="#FF8C42" transform="rotate(-90)"/>
 
-        <!-- SUN -->
-        <g class="sun">
-            <rect x="-60" y="-60" width="120" height="120" rx="20" ry="20" fill="#E63946" />
-            <polygon points="0,-45 -13,-13 -45,0 -13,13 0,45 13,13 45,0 13,-13" fill="#FFFFFF" />
-        </g>
-
+    <!-- SUN -->
+    <g class="sun">
+      <rect x="-60" y="-60" width="120" height="120" rx="20" fill="#E63946"/>
+      <polygon points="0,-45 -13,-13 -45,0 -13,13 0,45 13,13 45,0 13,-13" fill="#fff"/>
     </g>
+
+  </g>
 </svg>
 
 </body>
