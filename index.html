@@ -21,14 +21,14 @@
         overflow: hidden;
     }
 
-    /* === TIMING === */
+    /* === GLOBAL TIMING === */
     :root {
         --duration: 3s;
-        --ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Sun rises from below horizon */
-    .sun-center {
+    /* Sun rises from below */
+    .sun {
         animation: sun-rise var(--duration) var(--ease) forwards;
     }
 
@@ -43,29 +43,28 @@
         }
     }
 
-    /* Rays softly reveal (NOT grow) */
+    /* Rays grow OUT from the square */
     .ray {
-        opacity: 0;
-        animation: ray-reveal 1.6s var(--ease) forwards;
+        transform-origin: center bottom;
+        transform: scaleY(0);
+        animation: ray-grow 1.8s var(--ease) forwards;
     }
 
-    @keyframes ray-reveal {
+    @keyframes ray-grow {
         from {
-            opacity: 0;
-            transform: translateY(12px);
+            transform: scaleY(0);
         }
         to {
-            opacity: 1;
-            transform: translateY(0);
+            transform: scaleY(1);
         }
     }
 
     /* Center → sides delay */
-    .ray-0 { animation-delay: 0.6s; }
-    .ray-1 { animation-delay: 0.8s; }
-    .ray-2 { animation-delay: 1s; }
-    .ray-3 { animation-delay: 1.2s; }
-    .ray-4 { animation-delay: 1.4s; }
+    .ray-0 { animation-delay: 0.8s; }
+    .ray-1 { animation-delay: 1s; }
+    .ray-2 { animation-delay: 1.15s; }
+    .ray-3 { animation-delay: 1.3s; }
+    .ray-4 { animation-delay: 1.45s; }
 
 </style>
 </head>
@@ -75,22 +74,22 @@
 <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
     <g transform="translate(400, 300)">
 
-        <!-- RAYS (STATIC SHAPE, SOFT REVEAL) -->
-        <rect class="ray ray-0" x="-15" y="-280" width="30" height="220" fill="#FF8C42" />
-        <rect class="ray ray-1" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(22.5)" />
-        <rect class="ray ray-1" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-22.5)" />
+        <!-- RAYS (ORIGINATING FROM SQUARE EDGE) -->
+        <rect class="ray ray-0" x="-15" y="-180" width="30" height="180" fill="#FF8C42" />
+        <rect class="ray ray-1" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(22.5)" />
+        <rect class="ray ray-1" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-22.5)" />
 
-        <rect class="ray ray-2" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(45)" />
-        <rect class="ray ray-2" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-45)" />
+        <rect class="ray ray-2" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(45)" />
+        <rect class="ray ray-2" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-45)" />
 
-        <rect class="ray ray-3" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(67.5)" />
-        <rect class="ray ray-3" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-67.5)" />
+        <rect class="ray ray-3" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(67.5)" />
+        <rect class="ray ray-3" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-67.5)" />
 
-        <rect class="ray ray-4" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(90)" />
-        <rect class="ray ray-4" x="-15" y="-280" width="30" height="220" fill="#FF8C42" transform="rotate(-90)" />
+        <rect class="ray ray-4" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(90)" />
+        <rect class="ray ray-4" x="-15" y="-180" width="30" height="180" fill="#FF8C42" transform="rotate(-90)" />
 
         <!-- SUN -->
-        <g class="sun-center">
+        <g class="sun">
             <rect x="-60" y="-60" width="120" height="120" rx="20" ry="20" fill="#E63946" />
             <polygon points="0,-45 -13,-13 -45,0 -13,13 0,45 13,13 45,0 13,-13" fill="#FFFFFF" />
         </g>
